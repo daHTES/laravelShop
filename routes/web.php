@@ -11,12 +11,8 @@
 |
 */
 
-Route::get('/', function(){
-    return view('index');
-});
-Route::get('/categories', function(){
-    return view('categories');
-});
-Route::get('/mobile/iphone_x_64', function(){
-    return view('product');
-});
+Route::get('/', 'MainController@index');
+Route::get('/categories', 'MainController@categories');
+Route::get('/{category}', 'MainController@category');
+Route::get('/mobile/{product?}', 'MainController@product');
+
