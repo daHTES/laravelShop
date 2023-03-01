@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+Route::get('/', function(){
+    return view('index');
+});
+Route::get('/categories', function(){
+    return view('categories');
+});
+Route::get('/mobile/iphone_x_64', function(){
+    return view('product');
 });
