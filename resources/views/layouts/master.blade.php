@@ -29,8 +29,18 @@
             </ul>
 
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="http://laravel-diplom-1.rdavydov.ru/admin/home">Панель администратора</a></li>
+
+                @guest
+                    <li><a href="{{route('login')}}">Панель Администратора</a></li>
+                    <li><a href="{{route('register')}}">Регистрация</a></li>
+                @endguest
+
+                @auth
+                        <li><a href="{{route('home')}}">Панель Администратора</a></li>
+                <li><a href="{{route('get-logout')}}">Выйти</a></li>
+                @endauth
             </ul>
+
         </div>
     </div>
 </nav>
