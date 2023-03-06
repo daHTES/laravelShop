@@ -1,7 +1,6 @@
-@extends('master')
+@extends('layouts.master')
 @section('title', 'Все категории товаров')
 @section('content')
-<div class="container">
     <div class="starter-template">
         @foreach($categories as $category)
             <div class="panel">
@@ -16,5 +15,4 @@
         @endforeach
 
     </div>
-</div>
 @endsection
