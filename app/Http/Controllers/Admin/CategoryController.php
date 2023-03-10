@@ -16,7 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::get();
+        $categories = Category::paginate(10);
         return view('auth.categories.index', compact('categories'));
     }
 
@@ -41,9 +41,9 @@ class CategoryController extends Controller
     {
         $params = $request->all();
         unset($params['image']);
+
         if($request->has('image')) {
-            $path = $request->file('image')->store('categories');
-            $params['image'] = $path;
+            $params['image'] = $request->file('image')->store('categories');
         }
 
 
@@ -83,15 +83,16 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, Category $category)
     {
         $params = $request->all();
+
         unset($params['image']);
+
         if($request->has('image')){
             Storage::delete($category->image);
-            $path = $request->file('image')->store('categories');
-            $params['image'] = $path;
+            $params['image'] = $request->file('image')->store('categories');
         }
 
 
-       $category->update($request->all());
+       $category->update($params);
         return redirect()->route('categories.index');
     }
 
