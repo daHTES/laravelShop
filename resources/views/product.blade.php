@@ -1,9 +1,18 @@
 @extends('layouts.master')
+
 @section('title', 'Товар')
+
 @section('content')
-        <h1>{{$product}}</h1>
-        <p>Цена: <b>71990 руб.</b></p>
-        <img src="/img/iphone256.png">
-        <p>Отличный продвинутый телефон с памятью на 64 gb</p>
-        <a class="btn btn-success" href="http://laravel-diplom-1.rdavydov.ru/basket/1/add">Добавить в корзину</a>
+
+        <h1>{{$products->name}}</h1>
+        <h2>{{$products->category->name}}</h2>
+        <p>Цена: <b>{{$products->price}}</b></p>
+        <img src="{{Storage::url($products->image)}}" height=250 width=250">
+        <p>{{$products->description}}</p>
+        @if($products->isAvailable())
+            <a class="btn btn-success" href="{{route('basket-add', $products)}}">Добавить в корзину</a>
+        @else
+            Не доступен
+        @endif
+
 @endsection

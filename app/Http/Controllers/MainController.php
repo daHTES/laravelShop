@@ -42,9 +42,9 @@ class MainController extends Controller
         return view('category', compact('category' ));
     }
 
-    public function product($category, $product = null){
-
-        return view('products', ['products' => $product]);
+    public function product($category, $productCode){
+        $products = Product::withTrashed()->byCode($productCode)->first();
+        return view('product', compact('products'));
     }
     //
 }

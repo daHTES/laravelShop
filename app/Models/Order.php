@@ -16,7 +16,7 @@ class Order extends Model
 
     public function calculateFullSum(){
         $sum = 0;
-        foreach ($this->products() as $product){
+        foreach ($this->products()->withTrashed()->get() as $product){
             $sum += $product->getPriceForCount();
         }
         return $sum;
@@ -24,7 +24,7 @@ class Order extends Model
 
 
     public static function eraseOrderSum(){
-        session()->forget();
+        session()->forget('full_order_sum');
     }
 
 
