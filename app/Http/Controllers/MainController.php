@@ -3,8 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\ProductFilterRequest;
+use App\Http\Requests\SubscriptionRequest;
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\Subscription;
+use Illuminate\Http\Request;
 
 class MainController extends Controller
 {
@@ -43,8 +46,17 @@ class MainController extends Controller
     }
 
     public function product($category, $productCode){
-        $products = Product::withTrashed()->byCode($productCode)->first();
+        $products = Product::withTrashed()->byCode($productCode)->firstOrFail();
         return view('product', compact('products'));
+    }
+
+    public function subscribe(SubscriptionRequest $request, Product $product){
+        Subscription::create([
+            'email' => $request->email,
+                'product_id' => $product->id,
+            ]);
+
+        return redirect()->back()->with('success', 'Спасибо, мы свяжемся с вами при наличии товара');
     }
     //
 }
