@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\ProductFilterRequest;
 use App\Http\Requests\SubscriptionRequest;
 use App\Models\Category;
+use App\Models\Currency;
 use App\Models\Product;
 use App\Models\Subscription;
 use Illuminate\Http\Request;
@@ -12,6 +13,8 @@ use Illuminate\Http\Request;
 class MainController extends Controller
 {
     public function index(ProductFilterRequest $request){
+
+       // \App\Services\CurrencyRates::getRates();
         $productsQuery = Product::query();
     if($request->filled('price_from')){
         $productsQuery->where('price', '>=', $request->price_from);
@@ -29,6 +32,7 @@ class MainController extends Controller
 
 
     $products = $productsQuery->paginate(15)->withPath("?" . $request->getQueryString());
+
 
     return view('index', compact('products'));
     }
@@ -58,5 +62,12 @@ class MainController extends Controller
 
         return redirect()->back()->with('success', 'Спасибо, мы свяжемся с вами при наличии товара');
     }
+
+    public function changeCurrency($currencyCode){
+        $currency = Currency::byCode($currencyCode)->firstOrFail();
+        session(['currency' => $currency->code]);
+        return redirect()->back();
+    }
+
     //
 }

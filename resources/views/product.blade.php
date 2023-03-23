@@ -6,7 +6,7 @@
 
         <h1>{{$products->name}}</h1>
         <h2>{{$products->category->name}}</h2>
-        <p>Цена: <b>{{$products->price}}</b></p>
+        <p>Цена: <b>{{$products->price}} {{$currencySymbol}}</b></p>
         <img src="{{Storage::url($products->image)}}" height=250 width=250">
         <p>{{$products->description}}</p>
 

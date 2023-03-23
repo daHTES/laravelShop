@@ -16,6 +16,8 @@ Auth::routes([
     'confirm' => false,
     'verify' => false,
 ]);
+
+Route::get('currency/{currencyCode}', 'MainController@changeCurrency')->name('currency');
 Route::get('/logout', 'Auth\LoginController@logout')->name('get-logout');
 
 Route::middleware(['auth'])->group(function (){
