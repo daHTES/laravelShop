@@ -36,6 +36,7 @@
                     @admin
                     <li ><a href="{{route('categories.index')}}">Категории</a></li>
                     <li ><a href="{{route('products.index')}}">Товары</a></li>
+                    <li ><a href="{{route('properties.index')}}">Свойства</a></li>
                     <li ><a href="{{route('home')}}">Заказы</a></li>
                     @else
                         <li ><a href="{{route('home')}}">Заказы</a></li>
@@ -86,7 +87,7 @@
     <div class="py-4">
         <div class="container">
             <div class="row justify-content-center">
-                <div class="col-md-18">
+                <div class="col-md-12">
                     <div class="card">
                         <div class="card-header">@yield('title')</div>
 

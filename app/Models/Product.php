@@ -18,6 +18,14 @@ class Product extends Model
     }
 
 
+    public function skus(){
+        return $this->hasMany(Sku::class);
+    }
+
+
+    public function properties(){
+        return $this->belongsToMany(Property::class);
+    }
 
     public function getPriceForCount(){
         if(!is_null($this->pivot)){
